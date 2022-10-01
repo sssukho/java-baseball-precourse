@@ -17,6 +17,7 @@ public class GameService {
 
     public void match(Game game) {
         generateComputerRandomNumbersIfAbsent(game);
+        // TODO: 기능#3
     }
 
     private void generateComputerRandomNumbersIfAbsent(Game game) {

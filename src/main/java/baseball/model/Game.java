@@ -3,6 +3,7 @@ package baseball.model;
 public class Game {
     private Status status;
     private Computer computer;
+    private User user;
 
     public Game(Status status) {
         this.status = status;
@@ -22,6 +23,14 @@ public class Game {
 
     public void setComputer(Computer computer) {
         this.computer = computer;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public enum Status {

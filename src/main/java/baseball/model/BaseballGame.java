@@ -34,6 +34,8 @@ public class BaseballGame {
 
     public void start() {
         while (game.getStatus() == Game.Status.INIT || game.getStatus() == Game.Status.PLAYING) {
+            User user = new User(inputRandomNumber());
+            game.setUser(user);
             gameService.match(game);
         }
     }
