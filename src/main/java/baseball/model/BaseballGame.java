@@ -34,8 +34,12 @@ public class BaseballGame {
 
     public void start() {
         while (game.getStatus() == Game.Status.INIT || game.getStatus() == Game.Status.PLAYING) {
-            // TODO: 기능#2
             gameService.match(game);
         }
+    }
+
+    private String inputRandomNumber() {
+        view.printRandomNumberInputMessage();
+        return controller.inputRandomNumber();
     }
 }
