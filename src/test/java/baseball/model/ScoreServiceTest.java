@@ -1,18 +1,11 @@
 package baseball.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import baseball.model.Game.Status;
-import java.util.Map;
-import java.util.stream.Stream;
-import jdk.nashorn.internal.ir.CaseNode;
+import baseball.model.Round.Status;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
 class ScoreServiceTest {
     static ScoreService scoreService;
@@ -23,6 +16,7 @@ class ScoreServiceTest {
     }
 
     @Test
+    @DisplayName("기능#4 컴퓨터 측이 생성한 숫자와 사용자 입력 값 비교")
     void test() {
         // com: 425
         Score case1 = getResultScore(generateTestCase("425", "123")); // 1strike
@@ -45,23 +39,21 @@ class ScoreServiceTest {
         testResult(case8, 0, 3); // 3s
     }
 
-
-
     void testResult(Score scoreResult, int ball, int strike) {
         assertThat(scoreResult.getStrike()).isEqualTo(strike);
         assertThat(scoreResult.getBall()).isEqualTo(ball);
     }
 
-    Score getResultScore(Game game) {
-        return scoreService.processResultScore(game);
+    Score getResultScore(Round round) {
+        return scoreService.processResultScore(round);
     }
 
-    Game generateTestCase(String computerRandomNum, String userInput) {
+    Round generateTestCase(String computerRandomNum, String userInput) {
         Computer computer = new Computer(ComputerTest.newMap(computerRandomNum));
         User user = new User(userInput);
-        Game game = new Game(Status.PLAYING);
-        game.setComputer(computer);
-        game.setUser(user);
-        return game;
+        Round round = new Round(Status.PLAYING);
+        round.setComputer(computer);
+        round.setUser(user);
+        return round;
     }
 }

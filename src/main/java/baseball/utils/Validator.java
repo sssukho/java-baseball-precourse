@@ -4,13 +4,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Validation {
+public class Validator {
     private static final String COMPUTER_INVALID_MESSAGE = "invalid computer random map";
     private static final String INAPPROPRIATE_MESSAGE = "input length is inappropriate";
     private static final String CONTAINS_CHARACTER_MESSAGE = "user's input contains character which is not digit";
     private static final String CONTAINS_DUPLICATED_MESSAGE = "user's input contains duplicated digit";
     private static final String INVALID_RANGE = "range of input is invalid";
     private static final String NUMBER_REGEX = "[1-9]+";
+    public static final int CONTINUE_INPUT_START_INCLUSIVE = 1;
+    public static final int CONTINUE_INPUT_END_INCLUSIVE = 2;
 
     public static void validateUserNumberInput(String userInput) {
         if (userInput.length() != 3) {
@@ -25,10 +27,7 @@ public class Validation {
     }
 
     private static boolean containsCharacter(String userInput) {
-        if (userInput.matches(NUMBER_REGEX)) {
-            return false;
-        }
-        return true;
+        return !userInput.matches(NUMBER_REGEX);
     }
 
     private static boolean containsDuplicatedNumber(String userInput) {
@@ -36,13 +35,10 @@ public class Validation {
         for (char num : userInput.toCharArray()) {
             duplicateCheck.add(num);
         }
-        if (duplicateCheck.size() != 3) {
-            return true;
-        }
-        return false;
+        return duplicateCheck.size() != 3;
     }
 
-    public static void validateComputerRandomNumbers(Map<Integer, Integer> randomNumbers) { // TODO: 10줄 미만으로
+    public static void validateComputerRandomNumbers(Map<Integer, Integer> randomNumbers) {
         if (randomNumbers.size() != 3) {
             throw new IllegalArgumentException(COMPUTER_INVALID_MESSAGE);
         }
@@ -56,10 +52,7 @@ public class Validation {
     }
 
     private static boolean containsZero(Integer num) {
-        if (num < 1 || num > 9) {
-            return true;
-        }
-        return false;
+        return num < 1 || num > 9;
     }
 
     public static void validateUserContinueInput(String userInput) {
@@ -69,16 +62,13 @@ public class Validation {
         if (containsCharacter(userInput)) {
             throw new IllegalArgumentException(CONTAINS_CHARACTER_MESSAGE);
         }
-        if (!containsInRange(userInput, 1, 2)) {
+        if (!containsInRange(userInput)) {
             throw new IllegalArgumentException(INVALID_RANGE);
         }
     }
 
-    private static boolean containsInRange(String userInput, int startInclusive, int endInclusive) {
+    private static boolean containsInRange(String userInput) {
         int input = userInput.toCharArray()[0] - '0';
-        if (input > endInclusive || input < startInclusive) {
-            return false;
-        }
-        return true;
+        return input <= Validator.CONTINUE_INPUT_END_INCLUSIVE && input >= Validator.CONTINUE_INPUT_START_INCLUSIVE;
     }
 }

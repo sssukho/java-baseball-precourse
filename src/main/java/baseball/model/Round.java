@@ -1,11 +1,11 @@
 package baseball.model;
 
-public class Game {
+public class Round {
     private Status status;
     private Computer computer;
     private User user;
 
-    public Game(Status status) {
+    public Round(Status status) {
         this.status = status;
     }
 

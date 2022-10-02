@@ -7,11 +7,11 @@ public class ScoreService {
     private static final int STRIKE = 1;
     private static final int BALL = 2;
 
-    public Score processResultScore(Game game) {
+    public Score processResultScore(Round round) {
         Score resultScore = new Score(0, 0);
         int position = 0;
-        for (char userNum : game.getUser().getRandomNumCharArr()) {
-            int compareResult = compareUserWithComputer(game.getComputer().getRandomNumbers(), userNum - '0', position);
+        for (char userNum : round.getUser().getRandomNumCharArr()) {
+            int compareResult = compareUserWithComputer(round.getComputer().getRandomNumbers(), userNum - '0', position);
             countResultScore(resultScore, compareResult);
             position++;
         }

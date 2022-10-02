@@ -1,12 +1,12 @@
 package baseball.model;
 
-import baseball.utils.Validation;
+import baseball.utils.Validator;
 
 public class User {
-    private char[] randomNumCharArr;
+    private final char[] randomNumCharArr;
 
     public User(String userInput) {
-        Validation.validateUserNumberInput(userInput);
+        Validator.validateUserNumberInput(userInput);
         randomNumCharArr = userInput.toCharArray();
     }
 
