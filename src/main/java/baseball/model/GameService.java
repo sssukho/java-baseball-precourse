@@ -1,6 +1,7 @@
 package baseball.model;
 
 import baseball.model.Game.Status;
+import baseball.utils.MessageGenerator;
 import baseball.utils.NumberGenerator;
 import baseball.view.View;
 
@@ -20,6 +21,7 @@ public class GameService {
     public void match(Game game) {
         generateComputerRandomNumbersIfAbsent(game);
         Score resultScore = scoreService.processResultScore(game);
+        view.printScore(MessageGenerator.generateScoreMessage(resultScore));
         setGameStatus(game, resultScore);
     }
 

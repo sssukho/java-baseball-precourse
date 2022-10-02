@@ -9,4 +9,9 @@ public class ConsoleView implements View {
     public void printRandomNumberInputMessage() {
         System.out.print(RANDOM_NUMBER_INPUT_MESSAGE);
     }
+
+    @Override
+    public void printScore(String refinedScoreMessage) {
+        System.out.print(refinedScoreMessage);
+    }
 }
