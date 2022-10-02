@@ -10,14 +10,17 @@ public class GameService {
     private static final int GENERATE_RANDOM_NUM_RANGE_END = 9;
 
     private final View view;
+    private final ScoreService scoreService;
 
-    public GameService(View view) {
+    public GameService(View view, ScoreService scoreService) {
         this.view = view;
+        this.scoreService = scoreService;
     }
 
     public void match(Game game) {
         generateComputerRandomNumbersIfAbsent(game);
-        // TODO: 기능#3
+        Score resultScore = scoreService.processResultScore(game);
+        setGameStatus(game, resultScore);
     }
 
     private void generateComputerRandomNumbersIfAbsent(Game game) {
@@ -26,5 +29,13 @@ public class GameService {
                     NumberGenerator.generateRandomNumberMap(GENERATE_RANDOM_NUM_SIZE, GENERATE_RANDOM_NUM_RANGE_START,
                             GENERATE_RANDOM_NUM_RANGE_END)));
         }
+    }
+
+    private void setGameStatus(Game game, Score resultScore) {
+        if (resultScore.getStrike() == 3) {
+            game.setStatus(Status.END);
+            return;
+        }
+        game.setStatus(Status.PLAYING);
     }
 }

@@ -8,9 +8,9 @@ import baseball.view.console.ConsoleView;
 public class BaseballGame {
     public static final String MODE_CONSOLE = "console";
 
-    private Controller controller;
     private View view;
     private GameService gameService;
+    private Controller controller;
     private String mode;
     private Game game;
 
@@ -26,7 +26,7 @@ public class BaseballGame {
 
     private void initConsoleMode() {
         view = new ConsoleView();
-        gameService = new GameService(view);
+        gameService = new GameService(view, new ScoreService());
         controller = new ConsoleController();
         game = new Game(Game.Status.INIT);
         this.mode = MODE_CONSOLE;
