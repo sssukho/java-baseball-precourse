@@ -8,6 +8,8 @@ public class GameService {
     private static final int GENERATE_RANDOM_NUM_RANGE_START = 1;
     private static final int GENERATE_RANDOM_NUM_RANGE_END = 9;
 
+    private static final int STRIKE_OUT = 3;
+
     private final ScoreService scoreService;
 
     public GameService(ScoreService scoreService) {
@@ -30,7 +32,7 @@ public class GameService {
     }
 
     private void setGameStatus(Round round, Score resultScore) {
-        if (resultScore.getStrike() == 3) {
+        if (resultScore.getStrike() == STRIKE_OUT) {
             round.setStatus(Status.END);
             return;
         }

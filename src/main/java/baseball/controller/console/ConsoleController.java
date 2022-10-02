@@ -15,6 +15,8 @@ public class ConsoleController implements Controller {
     private static final String NEW_GAME = "1";
     private static final String EXIT = "2";
 
+    private static final String INVALID_USER_INPUT_MESSAGE = "invalid user input";
+
     private final View view;
     private final GameService gameService;
 
@@ -37,12 +39,14 @@ public class ConsoleController implements Controller {
         decideRestart(userInput, round);
     }
 
-    private String inputRandomNumber() {
+    @Override
+    public String inputRandomNumber() {
         view.printRandomNumberInputMessage();
         return Console.readLine();
     }
 
-    private String inputContinueGame() {
+    @Override
+    public String inputContinueGame() {
         view.printContinueGameInputMessage();
         return Console.readLine();
     }
@@ -55,7 +59,7 @@ public class ConsoleController implements Controller {
             terminate(round);
             return;
         }
-        throw new IllegalArgumentException("invalid user input"); // TODO: 상수화 시킬 것!
+        throw new IllegalArgumentException(INVALID_USER_INPUT_MESSAGE);
     }
 
     private void terminate(Round round) {
