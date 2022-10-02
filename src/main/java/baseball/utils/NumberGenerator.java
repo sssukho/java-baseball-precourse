@@ -7,12 +7,10 @@ import java.util.Map;
 public class NumberGenerator {
     public static Map<Integer, Integer> generateRandomNumberMap(int generateCnt, int startInclusive, int endInclusive)  {
         Map<Integer, Integer> randomNumbers = new HashMap<>();
-
         while (randomNumbers.size() < generateCnt) {
             int pickedNumber = Randoms.pickNumberInRange(startInclusive, endInclusive);
             addRandomNumberToMap(pickedNumber, randomNumbers);
         }
-
         return randomNumbers;
     }
 

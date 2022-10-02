@@ -13,8 +13,4 @@ public class User {
     public char[] getRandomNumCharArr() {
         return randomNumCharArr;
     }
-
-    public void setRandomNumCharArr(char[] randomNumCharArr) {
-        this.randomNumCharArr = randomNumCharArr;
-    }
 }

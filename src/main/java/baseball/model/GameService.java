@@ -10,6 +10,9 @@ public class GameService {
     private static final int GENERATE_RANDOM_NUM_RANGE_START = 1;
     private static final int GENERATE_RANDOM_NUM_RANGE_END = 9;
 
+    private static final String NEW_GAME = "1";
+    private static final String EXIT = "2";
+
     private final View view;
     private final ScoreService scoreService;
 
@@ -21,8 +24,8 @@ public class GameService {
     public void match(Game game) {
         generateComputerRandomNumbersIfAbsent(game);
         Score resultScore = scoreService.processResultScore(game);
-        view.printScore(MessageGenerator.generateScoreMessage(resultScore));
         setGameStatus(game, resultScore);
+        view.printScore(MessageGenerator.generateScoreMessage(resultScore));
     }
 
     private void generateComputerRandomNumbersIfAbsent(Game game) {
@@ -39,5 +42,24 @@ public class GameService {
             return;
         }
         game.setStatus(Status.PLAYING);
+    }
+
+    public void decideRestart(String userInput, BaseballGame baseballGame) {
+        if (userInput.contentEquals(NEW_GAME)) {
+            restart(baseballGame);
+            return;
+        } else if (userInput.contentEquals(EXIT)) {
+            terminate(baseballGame);
+            return;
+        }
+        throw new IllegalArgumentException("invalid user input"); // TODO: 상수화 시킬 것!
+    }
+
+    private void restart(BaseballGame baseballGame) {
+        baseballGame.restart();
+    }
+
+    private void terminate(BaseballGame baseballGame) {
+        baseballGame.terminate();
     }
 }

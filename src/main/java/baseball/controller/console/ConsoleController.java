@@ -8,4 +8,9 @@ public class ConsoleController implements Controller {
     public String inputRandomNumber() {
         return Console.readLine();
     }
+
+    @Override
+    public String inputContinueGame() {
+        return Console.readLine();
+    }
 }

@@ -9,6 +9,7 @@ public class Validation {
     private static final String INAPPROPRIATE_MESSAGE = "input length is inappropriate";
     private static final String CONTAINS_CHARACTER_MESSAGE = "user's input contains character which is not digit";
     private static final String CONTAINS_DUPLICATED_MESSAGE = "user's input contains duplicated digit";
+    private static final String INVALID_RANGE = "range of input is invalid";
     private static final String NUMBER_REGEX = "[1-9]+";
 
     public static void validateUserNumberInput(String userInput) {
@@ -59,5 +60,25 @@ public class Validation {
             return true;
         }
         return false;
+    }
+
+    public static void validateUserContinueInput(String userInput) {
+        if (userInput.length() != 1 ) {
+            throw new IllegalArgumentException(INAPPROPRIATE_MESSAGE);
+        }
+        if (containsCharacter(userInput)) {
+            throw new IllegalArgumentException(CONTAINS_CHARACTER_MESSAGE);
+        }
+        if (!containsInRange(userInput, 1, 2)) {
+            throw new IllegalArgumentException(INVALID_RANGE);
+        }
+    }
+
+    private static boolean containsInRange(String userInput, int startInclusive, int endInclusive) {
+        int input = userInput.toCharArray()[0] - '0';
+        if (input > endInclusive || input < startInclusive) {
+            return false;
+        }
+        return true;
     }
 }
